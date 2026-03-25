@@ -1,0 +1,57 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-primary: #3b82f6;
+  --color-secondary: #8b5cf6;
+  --color-accent: #f43f5e;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-white text-slate-900 transition-colors duration-300 font-sans;
+  }
+
+  .dark body {
+    @apply bg-slate-950 text-slate-100;
+  }
+
+  ::selection {
+    @apply bg-primary/30 text-primary;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-md bg-white/70 border border-white/20 shadow-xl;
+  }
+  
+  .dark .glass {
+    @apply bg-slate-900/70 border-slate-800/50 shadow-2xl;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-linear-to-r from-primary via-secondary to-accent;
+  }
+
+  .animate-glow {
+    animation: glow 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 20px -10px var(--color-primary);
+    }
+    to {
+      box-shadow: 0 0 40px 0px var(--color-secondary);
+    }
+  }
+}

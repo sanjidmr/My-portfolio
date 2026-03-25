@@ -1,0 +1,7 @@
+{
+  "name": "Aura Portfolio",
+  "description": "A premium, modern personal portfolio with AI-powered features including a chatbot, image generation, and text-to-speech.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
