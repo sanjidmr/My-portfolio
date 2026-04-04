@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Bot, 
@@ -47,7 +47,8 @@ const FloatingAI = () => {
     try {
       const response = await getGeminiResponse(userMsg);
       setMessages(prev => [...prev, { role: 'assistant', content: response || "Sorry, I couldn't process that." }]);
-    } catch (error) {
+    } catch (err) {
+      console.error("Gemini Error:", err);
       setMessages(prev => [...prev, { role: 'assistant', content: "Error: Failed to connect to Gemini." }]);
     } finally {
       setIsLoading(false);
@@ -74,7 +75,8 @@ const FloatingAI = () => {
       } else {
         setMessages(prev => [...prev, { role: 'assistant', content: "Failed to generate image." }]);
       }
-    } catch (error) {
+    } catch (err) {
+      console.error("Image Gen Error:", err);
       setMessages(prev => [...prev, { role: 'assistant', content: "Error generating image." }]);
     } finally {
       setIsLoading(false);
@@ -91,8 +93,8 @@ const FloatingAI = () => {
         audio.onended = () => setIsSpeaking(false);
         audio.play();
       }
-    } catch (error) {
-      console.error("TTS Error", error);
+    } catch (err) {
+      console.error("TTS Error:", err);
       setIsSpeaking(false);
     }
   };
@@ -115,13 +117,13 @@ const FloatingAI = () => {
             <motion.div
               animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.2, 0.5] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="absolute inset-0 bg-white rounded-full"
+              className="absolute inset-0 bg-slate-900 rounded-full"
             />
           </motion.button>
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
+              <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, y: 100, scale: 0.8 }}
@@ -142,23 +144,23 @@ const FloatingAI = () => {
                   <Bot size={24} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-sm">Aura Assistant</h3>
+                  <h3 className="font-bold font-outfit text-sm text-white">Aura Assistant</h3>
                   <div className="flex items-center gap-1">
                     <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-[10px] opacity-60">Online</span>
+                    <span className="text-[10px] font-outfit opacity-60 text-slate-400">Online</span>
                   </div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <button 
                   onClick={() => setIsMinimized(!isMinimized)}
-                  className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+                  className="p-2 hover:bg-slate-800/50 rounded-lg transition-colors text-white"
                 >
                   {isMinimized ? <Maximize2 size={18} /> : <Minimize2 size={18} />}
                 </button>
                 <button 
                   onClick={() => setIsOpen(false)}
-                  className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+                  className="p-2 hover:bg-slate-800/50 rounded-lg transition-colors text-white"
                 >
                   <X size={18} />
                 </button>
@@ -168,12 +170,12 @@ const FloatingAI = () => {
             {!isMinimized && (
               <>
                 {/* Tabs */}
-                <div className="flex p-2 gap-2 bg-slate-100/50 dark:bg-slate-800/50 mx-6 mt-4 rounded-xl">
+                <div className="flex p-2 gap-2 bg-slate-800/50 mx-6 mt-4 rounded-xl">
                   <button
                     onClick={() => setActiveTab('chat')}
                     className={cn(
-                      "flex-1 py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2",
-                      activeTab === 'chat' ? "bg-white dark:bg-slate-700 shadow-sm text-primary" : "opacity-60"
+                      "flex-1 py-2 rounded-lg text-xs font-bold font-outfit transition-all flex items-center justify-center gap-2",
+                      activeTab === 'chat' ? "bg-slate-700 shadow-sm text-primary" : "text-slate-400 opacity-60"
                     )}
                   >
                     <MessageSquare size={14} /> Chat
@@ -181,8 +183,8 @@ const FloatingAI = () => {
                   <button
                     onClick={() => setActiveTab('image')}
                     className={cn(
-                      "flex-1 py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2",
-                      activeTab === 'image' ? "bg-white dark:bg-slate-700 shadow-sm text-primary" : "opacity-60"
+                      "flex-1 py-2 rounded-lg text-xs font-bold font-outfit transition-all flex items-center justify-center gap-2",
+                      activeTab === 'image' ? "bg-slate-700 shadow-sm text-primary" : "text-slate-400 opacity-60"
                     )}
                   >
                     <ImageIcon size={14} /> Image Gen
@@ -205,10 +207,10 @@ const FloatingAI = () => {
                       )}
                     >
                       <div className={cn(
-                        "p-4 rounded-2xl text-sm leading-relaxed",
+                        "p-4 rounded-2xl text-sm font-outfit leading-relaxed",
                         msg.role === 'user' 
-                          ? "bg-primary text-white rounded-tr-none" 
-                          : "bg-slate-100 dark:bg-slate-800 rounded-tl-none"
+                          ? "bg-primary text-white rounded-tr-none shadow-lg shadow-primary/20" 
+                          : "bg-slate-800 text-slate-200 rounded-tl-none border border-slate-700"
                       )}>
                         {msg.type === 'image' ? (
                           <div className="space-y-3">
@@ -234,7 +236,7 @@ const FloatingAI = () => {
                       {msg.role === 'assistant' && msg.type !== 'image' && (
                         <button 
                           onClick={() => handleSpeak(msg.content)}
-                          className="mt-2 p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors opacity-40 hover:opacity-100"
+                          className="mt-2 p-1.5 rounded-lg hover:bg-slate-800 transition-colors opacity-40 hover:opacity-100 text-slate-400"
                         >
                           <Volume2 size={14} className={isSpeaking ? "animate-pulse text-primary" : ""} />
                         </button>
@@ -242,14 +244,14 @@ const FloatingAI = () => {
                     </motion.div>
                   ))}
                   {isLoading && (
-                    <div className="flex items-center gap-2 text-xs opacity-60">
+                    <div className="flex items-center gap-2 text-xs opacity-60 text-slate-400">
                       <Loader2 size={14} className="animate-spin" /> Aura is thinking...
                     </div>
                   )}
                 </div>
 
                 {/* Input Area */}
-                <div className="p-6 border-t border-slate-200 dark:border-slate-800">
+                <div className="p-6 border-t border-slate-800">
                   {activeTab === 'image' && (
                     <div className="flex gap-2 mb-4">
                       {["1K", "2K", "4K"].map((size) => (
@@ -260,7 +262,7 @@ const FloatingAI = () => {
                             "px-3 py-1 rounded-full text-[10px] font-bold border transition-all",
                             imageSize === size 
                               ? "bg-primary/10 border-primary text-primary" 
-                              : "border-slate-200 dark:border-slate-700 opacity-60"
+                              : "border-slate-700 text-slate-400 opacity-60"
                           )}
                         >
                           {size}
@@ -274,12 +276,12 @@ const FloatingAI = () => {
                       onChange={(e) => setInput(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && (activeTab === 'chat' ? handleSendMessage() : handleGenerateImage())}
                       placeholder={activeTab === 'chat' ? "Ask me anything..." : "Describe the image..."}
-                      className="w-full pl-6 pr-14 py-4 rounded-2xl bg-slate-100 dark:bg-slate-800 outline-none focus:ring-2 ring-primary/50 transition-all text-sm"
+                      className="w-full pl-6 pr-14 py-4 rounded-2xl bg-slate-800 outline-none focus:ring-2 ring-primary/50 transition-all text-sm font-outfit text-white placeholder:text-slate-500"
                     />
                     <button
                       onClick={activeTab === 'chat' ? handleSendMessage() : handleGenerateImage()}
                       disabled={isLoading || !input.trim()}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 p-3 rounded-xl bg-primary text-white disabled:opacity-50 transition-all"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 p-3 rounded-xl bg-primary text-white disabled:opacity-50 transition-all shadow-lg shadow-primary/20"
                     >
                       {activeTab === 'chat' ? <Send size={18} /> : <Sparkles size={18} />}
                     </button>

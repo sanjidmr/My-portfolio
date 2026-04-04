@@ -1,107 +1,150 @@
-import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion'; // "motion/react" change to "framer-motion" if needed
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
-import { Download, Send } from 'lucide-react';
-import image from "../assets/img/Sanjid.jpg"
+import { Download, Send, Github, Linkedin, Facebook, Instagram, Twitter } from 'lucide-react';
+import img from "../assets/img/Sanjid.jpg"
 
 const Hero = () => {
   const [text] = useTypewriter({
-    words: ['Frontend Developer', 'UI/UX Designer'],
+    words: ['Frontend Developer', 'UI/UX Designer', 'React Specialist'],
     loop: true,
     delaySpeed: 2000,
   });
 
+  const socialLinks = [
+    { icon: <Github size={25} />, url: "#", color: "hover:text-white" },
+    { icon: <Linkedin size={25} />, url: "#", color: "hover:text-blue-400" },
+    { icon: <Twitter size={25} />, url: "#", color: "hover:text-sky-400" },
+    { icon: <Instagram size={25} />, url: "#", color: "hover:text-pink-500" },
+    { icon: <Facebook size={25} />, url: "#", color: "hover:text-blue-600" },
+  ];
+
   return (
-    <section id="home" className="min-h-screen flex items-center pt-20 px-6 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        
-        {/* Image Section - মোবাইলে এটি উপরে দেখাবে (order-first md:order-last) */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="relative order-first md:order-last" 
-        >
-          <div className="relative z-10 w-full aspect-square max-w-[280px] md:max-w-[350px] mx-auto rounded-3xl overflow-hidden shadow-2xl group">
-            <img 
-              src={image}
-              alt="Sanjid" 
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              referrerPolicy="no-referrer"
-            />
-          </div>
+    <section id="home" className="min-h-screen flex items-center pt-28 pb-20 px-6 relative overflow-hidden bg-slate-950">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
+           style={{ backgroundImage: 'radial-gradient(#3b82f6 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+      
+      <div className="max-w-7xl mx-auto w-full relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
-          {/* Decorative Elements */}
-          <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-secondary/20 rounded-full blur-3xl animate-pulse" />
-        </motion.div>
-
-        {/* Text and Buttons Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center md:text-left" // মোবাইলে টেক্সট সেন্টারে থাকবে
-        >
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6 inline-block"
+          {/* Content Area */}
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col items-center text-center lg:items-start lg:text-left order-1" 
           >
-            Available for Freelance
-          </motion.span>
-          
-          <h1 className="text-4xl md:text-7xl font-display font-bold mb-4 leading-tight">
-            Hi, I'm <span className="text-gradient">Sanjid</span>
-          </h1>
-          
-          <div className="text-xl md:text-3xl font-medium text-slate-600 dark:text-slate-300 mb-6 h-12">
-            <span>{text}</span>
-            <Cursor cursorColor="#3b82f6" />
-          </div>
-          
-          <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed">
-            Crafting digital experiences that merge aesthetic precision with functional excellence. 
-            I build high-performance web applications with a focus on user-centric design.
-          </p>
-          
-          {/* Buttons - এখন মোবাইলে এগুলো ইমেজের নিচেই থাকবে যেহেতু টেক্সট সেকশন ইমেজের পরে আসছে */}
-          <div className="flex flex-wrap justify-center md:justify-start gap-4">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 rounded-full bg-primary text-white font-semibold flex items-center gap-2 shadow-lg shadow-primary/25 hover:bg-primary/90 transition-all"
+            {/* 1. Badge (Mobile: First) */}
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="px-4 py-2 rounded-full bg-blue-500/10 text-blue-400 text-xs font-bold uppercase tracking-widest mb-6 inline-block border border-blue-500/20"
             >
-              Contact Me <Send size={18} />
-            </motion.button>
+              Available for Freelance
+            </motion.span>
             
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => {
-                const link = document.createElement('a');
-                link.href = '#';
-                link.download = 'Mushfiqur_Rahman_Sanjid_CV.pdf';
-                link.click();
-              }}
-              className="px-8 py-4 rounded-full glass font-semibold flex items-center gap-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all border border-slate-200 dark:border-slate-700"
-            >
-              Download CV <Download size={18} />
-            </motion.button>
-          </div>
-        </motion.div>
+            {/* 2. Name (Mobile: Second) */}
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-6xl font-serif font-black mb-4 leading-[0.9] tracking-tight text-white">
+              Hi, I&apos;m <span className="text-gradient">Sanjid</span>
+            </h1>
+            
+            {/* 3. Job Title (Mobile: Third) */}
+            <div className="text-2xl sm:text-3xl font-outfit font-light text-slate-400 mb-8 h-10 tracking-wide">
+              <span>{text}</span>
+              <Cursor cursorColor="#3b82f6" />
+            </div>
 
+            {/* 4. Image (Mobile Only - appears between Title and Description) */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="relative w-full max-w-[280px] aspect-square mb-10 lg:hidden"
+            >
+              <div className="w-full h-full rounded-[3rem] overflow-hidden border-4 border-slate-800 shadow-2xl">
+                <img src={img} alt="Sanjid" className="w-full h-full object-cover" />
+              </div>
+            </motion.div>
+
+            {/* 5. Description (Mobile: After Image) */}
+            <p className="text-lg text-slate-400 mb-10 max-w-lg leading-relaxed">
+              Crafting digital experiences that merge aesthetic precision with functional excellence. 
+              I build high-performance web applications with a focus on user-centric design.
+            </p>
+            
+            {/* 6. Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 rounded-2xl bg-blue-600 text-white font-bold flex items-center justify-center gap-3 shadow-xl shadow-blue-500/30 hover:bg-blue-700 transition-all"
+              >
+                Contact Me <Send size={20} />
+              </motion.button>
+              
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 rounded-2xl bg-slate-900 font-bold flex items-center justify-center gap-3 hover:bg-slate-800 transition-all border border-slate-800 text-white"
+              >
+                Download CV <Download size={20} />
+              </motion.button>
+            </div>
+
+            {/* 7. Social Media Icons (New Section) */}
+            <div className="mt-8 flex items-center gap-6 text-slate-500">
+              {socialLinks.map((social, index) => (
+                <motion.a
+                  key={index}
+                  href={social.url}
+                  whileHover={{ y: -3, scale: 1.1 }}
+                  className={`transition-colors duration-300 ${social.color}`}
+                >
+                  {social.icon}
+                </motion.a>
+              ))}
+            </div>
+
+            {/* 8. Social Proof */}
+            <div className="mt-12 flex flex-col sm:flex-row items-center gap-4">
+              <div className="flex -space-x-3">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="w-10 h-10 rounded-full border-2 border-slate-950 overflow-hidden">
+                    <img src={`https://picsum.photos/seed/user${i}/100/100`} alt="Client" className="w-full h-full object-cover" />
+                  </div>
+                ))}
+              </div>
+              <p className="text-sm font-medium text-slate-400">
+                Trusted by <span className="font-bold text-blue-400">50+</span> clients
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Right Side: Profile Image (Desktop Only) */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="hidden lg:block relative w-full max-w-[480px] aspect-square mx-auto order-2"
+          >
+            <div className="relative z-10 w-full h-full rounded-[5rem] overflow-hidden shadow-2xl border-4 border-slate-800 group transform rotate-3 hover:rotate-0 transition-transform duration-500">
+              <img src={img} alt="Sanjid" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            </div>
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl animate-pulse" />
+          </motion.div>
+
+        </div>
       </div>
       
-      {/* Scroll Down Animation */}
+      {/* Scroll Indicator */}
       <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 hidden md:flex"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 opacity-50"
       >
-        <span className="text-xs font-medium uppercase tracking-widest">Scroll</span>
-        <div className="w-px h-12 bg-gradient-to-b from-primary to-transparent" />
+        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white">Explore</span>
+        <div className="w-px h-10 bg-gradient-to-b from-blue-500 to-transparent" />
       </motion.div>
     </section>
   );

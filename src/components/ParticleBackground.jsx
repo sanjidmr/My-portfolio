@@ -1,22 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
 
 const ParticleBackground = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const checkTheme = () => {
-      setIsDarkMode(document.documentElement.classList.contains('dark'));
-    };
-    checkTheme();
-    const observer = new MutationObserver(checkTheme);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-      <div className={isDarkMode ? "absolute inset-0 bg-slate-950" : "absolute inset-0 bg-white"} />
+      <div className="absolute inset-0 bg-slate-950" />
       
       {/* Animated Gradients */}
       <motion.div
@@ -48,9 +36,9 @@ const ParticleBackground = () => {
 
       {/* Grid Pattern */}
       <div 
-        className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
+        className="absolute inset-0 opacity-[0.05]"
         style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, ${isDarkMode ? '#fff' : '#000'} 1px, transparent 0)`,
+          backgroundImage: `radial-gradient(circle at 2px 2px, #fff 1px, transparent 0)`,
           backgroundSize: '40px 40px'
         }}
       />

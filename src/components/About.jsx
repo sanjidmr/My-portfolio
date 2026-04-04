@@ -1,8 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Code2, Palette, Zap, Globe } from 'lucide-react';
-import { FaGithub, FaLinkedin ,FaTwitter  } from "react-icons/fa";
-
+import { Code2, Palette, Zap, Globe, Github, Linkedin, Twitter } from 'lucide-react';
 
 const About = () => {
   return (
@@ -15,30 +13,30 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-8">
-              Turning your <span className="text-gradient">Vision</span> <br /> Into Digital Reality
+            <h2 className="text-5xl md:text-7xl font-serif font-black mb-8 tracking-tight leading-tight text-white">
+              Turning <span className="text-gradient">Vision</span> <br /> Into  Reality
             </h2>
-            <p className="text-lg text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
-              I am a passionate Frontend Developer with over 1 years of experience in building 
+            <p className="text-lg font-outfit text-slate-400 mb-6 leading-relaxed">
+              I am a passionate Frontend Developer with over 2 years of experience in building 
               modern web applications. My journey started with a curiosity for how things work 
               on the web, which evolved into a professional career dedicated to creating 
               seamless user experiences.
             </p>
-            <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
+            <p className="text-lg font-outfit text-slate-400 mb-8 leading-relaxed">
               I specialize in React, JavaScript, and modern CSS frameworks like Tailwind. 
               I believe that great design is not just about how it looks, but how it feels 
               and functions for the end user.
             </p>
 
             <div className="flex gap-4">
-              <a href="#" className="p-3 rounded-xl glass hover:bg-primary/10 transition-colors">
-                <FaGithub size={24} />
+              <a href="#" className="p-3 rounded-xl glass hover:bg-primary/10 transition-colors text-slate-300">
+                <Github size={24} />
               </a>
-              <a href="#" className="p-3 rounded-xl glass hover:bg-primary/10 transition-colors">
-                <FaLinkedin size={24} />
+              <a href="#" className="p-3 rounded-xl glass hover:bg-primary/10 transition-colors text-slate-300">
+                <Linkedin size={24} />
               </a>
-              <a href="#" className="p-3 rounded-xl glass hover:bg-primary/10 transition-colors">
-                <FaTwitter size={24} />
+              <a href="#" className="p-3 rounded-xl glass hover:bg-primary/10 transition-colors text-slate-300">
+                <Twitter size={24} />
               </a>
             </div>
           </motion.div>
@@ -56,13 +54,13 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="p-6 rounded-3xl glass hover:scale-105 transition-transform duration-300"
+                className="p-6 rounded-3xl glass hover:scale-105 transition-transform duration-300 border border-slate-800/50"
               >
-                <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
+                <div className="w-12 h-12 rounded-2xl bg-slate-800 flex items-center justify-center mb-4">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-                <p className="text-sm opacity-60">{feature.desc}</p>
+                <h3 className="text-xl font-serif font-bold mb-2 text-white">{feature.title}</h3>
+                <p className="text-sm font-outfit text-slate-400 opacity-80">{feature.desc}</p>
               </motion.div>
             ))}
           </div>

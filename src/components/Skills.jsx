@@ -20,7 +20,7 @@ const skills = [
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-24 px-6 bg-slate-50/50 dark:bg-slate-900/20">
+    <section id="skills" className="py-24 px-6 bg-slate-900/20">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between mb-16 gap-8">
           <div className="max-w-2xl">
@@ -28,17 +28,17 @@ const Skills = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-display font-bold mb-4"
+              className="text-5xl md:text-7xl font-serif font-black mb-6 tracking-tight text-white"
             >
               Technical <span className="text-gradient">Expertise</span>
             </motion.h2>
-            <p className="text-slate-600 dark:text-slate-400">
+            <p className="text-lg font-outfit text-slate-400">
               A curated selection of technologies I leverage to build high-performance, 
               scalable web applications with a focus on modern standards and exceptional user experience.
             </p>
           </div>
           <div className="flex items-center gap-4">
-            <span className="text-xs font-bold uppercase tracking-widest opacity-40">Skills & Tools</span>
+            <span className="text-xs font-bold uppercase tracking-widest opacity-40 text-white">Skills & Tools</span>
           </div>
         </div>
 
@@ -51,12 +51,12 @@ const Skills = () => {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
               whileHover={{ y: -5, scale: 1.05 }}
-              className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 group flex flex-col items-center text-center gap-4"
+              className="p-6 rounded-2xl border border-slate-800 bg-slate-900/50 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 group flex flex-col items-center text-center gap-4 shadow-sm"
             >
-              <div className={`w-16 h-16 rounded-2xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-3xl transition-all duration-500 group-hover:scale-110 ${skill.color}`}>
+              <div className={`w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center text-3xl transition-all duration-500 group-hover:scale-110 shadow-sm ${skill.color}`}>
                 {skill.icon}
               </div>
-              <h3 className="font-bold text-sm tracking-tight">{skill.name}</h3>
+              <h3 className="font-bold text-sm font-outfit tracking-widest uppercase text-slate-300">{skill.name}</h3>
             </motion.div>
           ))}
         </div>
