@@ -28,7 +28,8 @@ const Navbar = () => {
   return (
     <nav
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4',
+        // 'fixed' er poriborte 'absolute' use kora hoyeche jeno scroll korle upore chole jay
+        'absolute top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4',
         isScrolled ? 'glass py-3 border-b border-slate-800/20' : 'bg-transparent'
       )}
     >
@@ -39,7 +40,7 @@ const Navbar = () => {
           animate={{ opacity: 1, x: 0 }}
           className="text-2xl font-serif font-bold text-gradient"
         >
-          Mushfiqur Rahman Sanjid
+          Mushfiqur Rahman 
         </motion.a>
 
         {/* Desktop Menu */}

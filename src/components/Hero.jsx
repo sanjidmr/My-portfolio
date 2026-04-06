@@ -21,18 +21,18 @@ const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center pt-28 pb-20 px-6 relative overflow-hidden bg-slate-950">
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
-           style={{ backgroundImage: 'radial-gradient(#3b82f6 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-      
+      <div className="absolute inset-0 opacity-[0.05] pointer-events-none"
+        style={{ backgroundImage: 'radial-gradient(#3b82f6 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+
       <div className="max-w-7xl mx-auto w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          
+
           {/* Content Area */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col items-center text-center lg:items-start lg:text-left order-1" 
+            className="flex flex-col items-center text-center lg:items-start lg:text-left order-1"
           >
             {/* 1. Badge (Mobile: First) */}
             <motion.span
@@ -43,12 +43,12 @@ const Hero = () => {
             >
               Available for Freelance
             </motion.span>
-            
+
             {/* 2. Name (Mobile: Second) */}
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-6xl font-serif font-black mb-4 leading-[0.9] tracking-tight text-white">
               Hi, I&apos;m <span className="text-gradient">Sanjid</span>
             </h1>
-            
+
             {/* 3. Job Title (Mobile: Third) */}
             <div className="text-2xl sm:text-3xl font-outfit font-light text-slate-400 mb-8 h-10 tracking-wide">
               <span>{text}</span>
@@ -68,27 +68,35 @@ const Hero = () => {
 
             {/* 5. Description (Mobile: After Image) */}
             <p className="text-lg text-slate-400 mb-10 max-w-lg leading-relaxed">
-              Crafting digital experiences that merge aesthetic precision with functional excellence. 
+              Crafting digital experiences that merge aesthetic precision with functional excellence.
               I build high-performance web applications with a focus on user-centric design.
             </p>
-            
+
             {/* 6. Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => window.open("https://wa.me/8801645832896?text=Hi, I'm interested in your services!", "_blank")}
                 className="px-8 py-4 rounded-2xl bg-blue-600 text-white font-bold flex items-center justify-center gap-3 shadow-xl shadow-blue-500/30 hover:bg-blue-700 transition-all"
               >
                 Contact Me <Send size={20} />
               </motion.button>
-              
-              <motion.button
+
+              <motion.a
+                href="/cv.pdf"
+                download
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 rounded-2xl bg-slate-900 font-bold flex items-center justify-center gap-3 hover:bg-slate-800 transition-all border border-slate-800 text-white"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl 
+      bg-gradient-to-r from-slate-900 to-slate-800 
+      text-white font-semibold shadow-lg 
+      border border-slate-700 
+      hover:shadow-xl transition-all duration-300"
               >
-                Download CV <Download size={20} />
-              </motion.button>
+                Download CV
+                <Download size={20} />
+              </motion.a>
             </div>
 
             {/* 7. Social Media Icons (New Section) */}
@@ -106,18 +114,7 @@ const Hero = () => {
             </div>
 
             {/* 8. Social Proof */}
-            <div className="mt-12 flex flex-col sm:flex-row items-center gap-4">
-              <div className="flex -space-x-3">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="w-10 h-10 rounded-full border-2 border-slate-950 overflow-hidden">
-                    <img src={`https://picsum.photos/seed/user${i}/100/100`} alt="Client" className="w-full h-full object-cover" />
-                  </div>
-                ))}
-              </div>
-              <p className="text-sm font-medium text-slate-400">
-                Trusted by <span className="font-bold text-blue-400">50+</span> clients
-              </p>
-            </div>
+
           </motion.div>
 
           {/* Right Side: Profile Image (Desktop Only) */}
@@ -136,7 +133,7 @@ const Hero = () => {
 
         </div>
       </div>
-      
+
       {/* Scroll Indicator */}
       <motion.div
         animate={{ y: [0, 10, 0] }}
