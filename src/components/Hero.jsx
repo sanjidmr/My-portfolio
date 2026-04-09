@@ -88,11 +88,8 @@ const Hero = () => {
                 download
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl 
-      bg-gradient-to-r from-slate-900 to-slate-800 
-      text-white font-semibold shadow-lg 
-      border border-slate-700 
-      hover:shadow-xl transition-all duration-300"
+                className="px-8 py-4 rounded-2xl px-8 py-4 rounded-2xl  bg-gradient-to-r from-slate-900 to-slate-800 
+      text-white font-semibold flex items-center justify-center gap-3 shadow-xl transition-all flex items-center justify-center gap-3  transition-all"
               >
                 Download CV
                 <Download size={20} />
